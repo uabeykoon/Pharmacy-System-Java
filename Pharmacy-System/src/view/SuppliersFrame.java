@@ -14,6 +14,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 
 public class SuppliersFrame extends JFrame {
@@ -21,6 +23,8 @@ public class SuppliersFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
+	private ArrayList<String> menuItems= new ArrayList<>();
+	private String[] mItemStrings = new String[menuItems.size()];
 
 	/**
 	 * Launch the application.
@@ -54,25 +58,17 @@ public class SuppliersFrame extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(7, 195, 180, 53);
-		panel.add(btnNewButton_1);
-		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Add New Supplier");
 		btnNewButton.setBounds(7, 69, 180, 53);
 		panel.add(btnNewButton);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(7, 133, 180, 53);
-		panel.add(btnNewButton_2);
-		
 		textField = new JTextField();
-		textField.setBounds(288, 151, 352, 33);
+		textField.setBounds(288, 151, 370, 33);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		table = new JTable();
-		table.setBounds(288, 245, 352, 205);
+		table.setBounds(288, 245, 370, 205);
 		
 		contentPane.add(table);
 		
@@ -81,8 +77,10 @@ public class SuppliersFrame extends JFrame {
 		lblNewLabel.setBounds(404, 45, 84, 22);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(669, 156, 197, 22);
+//dropdown list initialization		
+		addItemsToMenu();
+		JComboBox comboBox = new JComboBox(menuItems.toArray(mItemStrings));
+		comboBox.setBounds(669, 151, 197, 33);
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("Related suppliers");
@@ -93,5 +91,21 @@ public class SuppliersFrame extends JFrame {
 		lblNewLabel_1_1.setBounds(288, 131, 114, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
+		JButton btnNewButton_2 = new JButton("View Supplier");
+		btnNewButton_2.setBounds(288, 474, 180, 53);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_1 = new JButton("Edit Supplier");
+		btnNewButton_1.setBounds(478, 474, 180, 53);
+		contentPane.add(btnNewButton_1);
+		
 	}
+	
+//add item to array list to display 	
+	public void addItemsToMenu(){
+		this.menuItems.add("By Name");
+		this.menuItems.add("By TP Number");
+	}
+		
+	
 }
