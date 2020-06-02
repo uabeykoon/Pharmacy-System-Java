@@ -53,7 +53,7 @@ public class MainViewFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				SuppliersFrame frame = new SuppliersFrame();
 				frame.setVisible(true);
-				System.out.println("menuclicked");
+				//System.out.println("menuclicked");
 			}
 		});
 		

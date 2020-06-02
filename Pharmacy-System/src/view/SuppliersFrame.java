@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
+
+import javax.sound.midi.VoiceStatus;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JList;
@@ -17,14 +19,17 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLayeredPane;
 
 public class SuppliersFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTable table;
 	private ArrayList<String> menuItems= new ArrayList<>();
 	private String[] mItemStrings = new String[menuItems.size()];
+	private JTextField textField;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -59,44 +64,58 @@ public class SuppliersFrame extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Add New Supplier");
-		btnNewButton.setBounds(7, 69, 180, 53);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddSupplierFrame frame = new AddSupplierFrame();
+				//onClickAddSupplier();
+			}
+		});
+		btnNewButton.setBounds(10, 137, 180, 53);
 		panel.add(btnNewButton);
 		
+//dropdown list initialization		
+		addItemsToMenu();
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 1, 1);
+		contentPane.add(layeredPane);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(201, 0, 685, 565);
+		layeredPane.add(panel_1);
+		
 		textField = new JTextField();
-		textField.setBounds(288, 151, 370, 33);
-		contentPane.add(textField);
 		textField.setColumns(10);
+		textField.setBounds(238, 146, 370, 33);
+		contentPane.add(textField);
 		
 		table = new JTable();
-		table.setBounds(288, 245, 370, 205);
-		
+		table.setBounds(238, 240, 370, 205);
 		contentPane.add(table);
 		
 		JLabel lblNewLabel = new JLabel("Suppliers");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(404, 45, 84, 22);
+		lblNewLabel.setBounds(354, 40, 84, 22);
 		contentPane.add(lblNewLabel);
 		
-//dropdown list initialization		
-		addItemsToMenu();
-		JComboBox comboBox = new JComboBox(menuItems.toArray(mItemStrings));
-		comboBox.setBounds(669, 151, 197, 33);
+		JComboBox comboBox = new JComboBox(new Object[]{});
+		comboBox.setBounds(619, 146, 197, 33);
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("Related suppliers");
-		lblNewLabel_1.setBounds(292, 220, 114, 14);
+		lblNewLabel_1.setBounds(242, 215, 114, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Search suppliers");
-		lblNewLabel_1_1.setBounds(288, 131, 114, 14);
+		lblNewLabel_1_1.setBounds(238, 126, 114, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JButton btnNewButton_2 = new JButton("View Supplier");
-		btnNewButton_2.setBounds(288, 474, 180, 53);
+		btnNewButton_2.setBounds(238, 469, 180, 53);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_1 = new JButton("Edit Supplier");
-		btnNewButton_1.setBounds(478, 474, 180, 53);
+		btnNewButton_1.setBounds(428, 469, 180, 53);
 		contentPane.add(btnNewButton_1);
 		
 	}
@@ -106,6 +125,8 @@ public class SuppliersFrame extends JFrame {
 		this.menuItems.add("By Name");
 		this.menuItems.add("By TP Number");
 	}
-		
-	
+	public void onClickAddSupplier() {
+		System.out.println("ssss");
+		AddSupplierFrame frame = new AddSupplierFrame();
+	}
 }
